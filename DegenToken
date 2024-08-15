@@ -7,7 +7,11 @@ contract DegenToken is ERC20 {
 
     address public owner;
 
+    // Mapping to store item costs
     mapping(uint => uint) public itemCosts;
+
+    // Mapping to store redeemed items for each player
+    mapping(address => uint[]) public redeemedItems;
 
     constructor() ERC20("Degen", "DGN") {
         owner = msg.sender;
@@ -15,7 +19,6 @@ contract DegenToken is ERC20 {
         itemCosts[2] = 200;
         itemCosts[3] = 300;
     }
-
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Only the owner can call this function");
@@ -34,12 +37,22 @@ contract DegenToken is ERC20 {
 
     function redeem(uint itemNo) public {
         uint256 amount = itemCosts[itemNo];
+        require(amount > 0, "Invalid item number");
         _burn(msg.sender, amount);
+        
+        // Deliver the item to the player
+        redeemedItems[msg.sender].push(itemNo);
+        
         emit Redeemed(msg.sender, itemNo, amount);
     }
 
     function transfer(address to, uint amount) public override returns(bool){
-		_transfer(msg.sender, to, amount);
-		return true;
-	}
+        _transfer(msg.sender, to, amount);
+        return true;
+    }
+
+    // Function to get the redeemed items of a player
+    function getRedeemedItems(address player) public view returns (uint[] memory) {
+        return redeemedItems[player];
+    }
 }
