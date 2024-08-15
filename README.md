@@ -6,7 +6,8 @@ This project is a Solidity smart contract for the DegenToken, an ERC-20 token us
 
 - *Mint function* (mint): Allows the owner to mint new tokens to a specified address.
 - *Burn function* (burn): Allows any token holder to burn their tokens.
-- *Redeem function* (redeem): Allows any token holder to redeem their tokens for in-game items.
+- *Redeem function* (redeem): Allows any token holder to redeem their tokens for in-game items and records which items have been redeemed.
+- *Get Redeemed Items function* (getRedeemedItems): Allows querying which items a player has redeemed.
 
 ## Getting Started
 
@@ -25,7 +26,8 @@ To use the DegenToken contract, you can simply copy the code from the code file 
 
 - *Mint Tokens*: The owner can mint new tokens to a specific address using the mint function.
 - *Burn Tokens*: Any token holder can burn their tokens using the burn function.
-- *Redeem Tokens*: Any token holder can redeem their tokens for in-game items using the redeem function.
+- *Redeem Tokens*: Any token holder can redeem their tokens for in-game items using the redeem function, which also records the redeemed items.
+- *Get Redeemed Items*: Query which items a specific player has redeemed using the getRedeemedItems function.
 
 ## Help
 
